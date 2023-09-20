@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract VickyWallet {
+address payable public owner;
+mapping(address => uint256) public accountBalance;
+
+
+
+
+function getBalance() public view returns(uint256) {
+    return address(this).balance;
+}
+function deposit() payable public {
+    accountBalance[msg.sender] += msg.value;
+}
+function withdrawMoney(address payable _receiver, uint256 _amount) public {
+    accountBalance[msg.sender] -= _amount;
+    _receiver.transfer(_amount);
+}
+}
